@@ -21,7 +21,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private ArrayList<String> mDatas =new ArrayList<>();
 
     private void generateDatas(){
-        for (int i=0;i<200;i++){
+        for (int i=0;i<10;i++){
             if(i == 0){
                 mDatas.add("2019-5.21 14:12:00\n你的快件已签收 感谢使用中通快递，期待再次为您服务！");
             }else

@@ -9,6 +9,7 @@ import android.view.View;
 
 /***
  * 时间轴 -- 2019.5.21
+ * view getLeft -- https://blog.csdn.net/u013872857/article/details/53750682
  */
 public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -16,10 +17,10 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
     private Paint mPaint;//画笔
     private int mPaintSize = 6;//画笔宽度
     private String mPaintColor = "#B8B8B8";//画笔默认颜色
+    private boolean isFinish = true;//订单是否完成
 
     public TimeLineItemDecoration() {
         mPaint = new Paint();
-        mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(mPaintSize);
         mPaint.setColor(Color.parseColor(mPaintColor));
     }
@@ -53,17 +54,25 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
             int leftX = left / 2;//轴线的x轴坐标
             int height = child.getHeight();//item的高度，不包含Margin
 
-            if (childCount==1){
-                canvas.drawLine(leftX, top, leftX, bottom - height / 2, mPaint);
+
+            if (childCount == 1){
+                //只有一个的话，画个圆即可
+//                canvas.drawLine(leftX, top, leftX, bottom - height / 2, mPaint);
             }else {
                 if (i == 0) {
-                    //(startX,startY) -> (endX,endY)
+                    //从中心点到控件的底边距 -- 因为第一个view的范围只有这么大
                     canvas.drawLine(leftX, top + height / 2, leftX, bottom + bottomMargin, mPaint);
                 } else if (i == childCount - 1) {
+                    //从底边距到下个中心点的距离
                     canvas.drawLine(leftX, top - topMargin, leftX, bottom - height / 2, mPaint);
                 } else {
+                    mPaint.setColor(Color.parseColor(mPaintColor));
+                    //从底边距到下个中心点的距离
                     canvas.drawLine(leftX, top - topMargin, leftX, bottom - height / 2, mPaint);
+                    //从下个中心点的距离到底边距
                     canvas.drawLine(leftX, top + height / 2, leftX, bottom + bottomMargin, mPaint);
+                    //方式二 一步解决：用于状态不多的情况
+                    //canvas.drawLine(leftX,top,leftX,bottom,mPaint);
                 }
             }
             canvas.drawCircle(leftX, top + height / 2, mCircleSize, mPaint);
