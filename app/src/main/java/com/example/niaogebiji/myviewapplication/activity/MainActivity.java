@@ -1,4 +1,4 @@
-package com.example.niaogebiji.myviewapplication;
+package com.example.niaogebiji.myviewapplication.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,9 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.niaogebiji.myviewapplication.R;
 import com.example.niaogebiji.myviewapplication.view.MyWaterFallLayout;
-
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
