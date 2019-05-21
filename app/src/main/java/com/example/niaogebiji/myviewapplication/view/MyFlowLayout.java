@@ -2,6 +2,7 @@ package com.example.niaogebiji.myviewapplication.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -10,8 +11,18 @@ import android.view.ViewGroup;
  * 1.没涉及VG自身的padding -- ok
  * 2.自身的margin是被父类计算在内了,比如LinearLayout下方的VG,写入VG的margin，LinearLayout是计算过的 -- ok
  * 3.涉及VG自己的padding -- ①在计算换行时 ②最后设定宽高 ③默认布局时的坐标
+ * 4.调整了宽度最大值的获取 -- 2019.5.21
+ * 5.调整了layout时换行时left的重新赋值 -- 2019.5.21
+ *
+ * 点击事件
  */
 public class MyFlowLayout extends ViewGroup {
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
 
     public MyFlowLayout(Context context) {
         super(context);
@@ -56,10 +67,14 @@ public class MyFlowLayout extends ViewGroup {
             //当前子空间实际占据的宽度
             int childWidth =  child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
 
-            //换行条件判断 -- 减去VG自身的padding
-           if(lineWidth + childWidth > measureWidth - getPaddingLeft() - getPaddingRight()){
-               width = Math.max(lineWidth,childWidth);//这里基本都是以屏幕的宽度为值
+            int paddingLeft = getPaddingLeft();
+            int paddingRight = getPaddingRight();
+            //TODO 换行条件判断 -- 减去VG自身的padding = 控件真正能给予的宽度
+           if(lineWidth + childWidth > measureWidth - paddingLeft - paddingRight){
+
+               width = Math.max(lineWidth,childWidth);
                height += lineHeight;//高度累加
+               //因为由于盛不下当前控件，而将此控件调到下一行，所以将此控件的高度和宽度初始化给lineHeight、lineWidth
                lineWidth = childWidth;
                lineHeight = childHeight;
            }else{
@@ -69,8 +84,11 @@ public class MyFlowLayout extends ViewGroup {
 
            //最后一行设值 -- 加入VG自身的padding
             if(i == count - 1){
+                //TODO 别忘了控件自身的top 和 bottom
                height += lineHeight + getPaddingTop() + getPaddingBottom();
-               width = Math.max(width,lineWidth);
+
+               width = Math.max(width,measureWidth);
+                Log.e("tag","控件的最大宽度：" + width);
             }
         }
 
@@ -89,6 +107,7 @@ public class MyFlowLayout extends ViewGroup {
         int lineWidth = 0;
         int lineHeight = 0;
         int count = getChildCount();
+
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
 
@@ -101,7 +120,7 @@ public class MyFlowLayout extends ViewGroup {
 
             if(lineWidth + childWidth > getMeasuredWidth() - getPaddingLeft() - getPaddingRight()){
                 top += childHeight;//下一次重新赋值
-                left = 0;
+                left = 0 + getPaddingLeft();//注意换行时也是默认的值
                 lineHeight = childHeight;
                 lineWidth = childWidth;
             }else{
@@ -117,7 +136,7 @@ public class MyFlowLayout extends ViewGroup {
             int bc = tc + child.getMeasuredHeight();
             child.layout(lc,tc,rc,bc);
 
-            left += childWidth;//下一次重新赋值
+            left += childWidth;//下一次重新赋值 -- 更新
 
         }
     }
@@ -137,5 +156,10 @@ public class MyFlowLayout extends ViewGroup {
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
         return new MarginLayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+    }
+
+
+    public interface  OnItemClickListener{
+        void onItemClick(View v,int index);
     }
 }

@@ -6,13 +6,13 @@
     android:layout_height="wrap_content">
 
 
-    <!--  第二个 -->
+    <!--  第一个 -->
     <com.example.niaogebiji.myviewapplication.view.MyFlowLayout
-        android:layout_marginTop="30dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
         android:paddingRight="0dp"
-        android:paddingLeft="0dp"
         android:background="#E1E6F6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -55,6 +55,29 @@
             android:textColor="#43BBE7" />
 
     </com.example.niaogebiji.myviewapplication.view.MyFlowLayout>
+
+    <!--  第二个 -->
+    <Button
+        android:id="@+id/addPic"
+        android:text="添加图片"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.niaogebiji.myviewapplication.view.MyWaterFallLayout
+            android:id="@+id/myWaterFallLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.example.niaogebiji.myviewapplication.view.MyWaterFallLayout>
+
+    </ScrollView>
+
 
 
 </LinearLayout>
