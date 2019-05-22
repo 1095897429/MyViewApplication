@@ -9,7 +9,7 @@ import android.view.View;
 
 /***
  * 时间轴 -- 2019.5.21
- * view getLeft -- https://blog.csdn.net/u013872857/article/details/53750682
+ * getLeft 不明白的参看 :https://blog.csdn.net/u013872857/article/details/53750682
  */
 public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -17,7 +17,6 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
     private Paint mPaint;//画笔
     private int mPaintSize = 6;//画笔宽度
     private String mPaintColor = "#B8B8B8";//画笔默认颜色
-    private boolean isFinish = true;//订单是否完成
 
     public TimeLineItemDecoration() {
         mPaint = new Paint();
@@ -41,7 +40,7 @@ public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
 
-            //自己到父容器的距离
+            //view的原始状态相对于父容器的坐标
             int left = child.getLeft();
             int top = child.getTop();
             int bottom = child.getBottom();

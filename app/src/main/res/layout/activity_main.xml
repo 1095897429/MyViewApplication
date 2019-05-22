@@ -7,7 +7,7 @@
 
 
     <!--  第一个 -->
-    <com.example.niaogebiji.myviewapplication.view.MyFlowLayout
+    <com.example.niaogebiji.myviewapplication.view.commonviewgroup.MyFlowLayout
         android:layout_marginTop="0dp"
         android:paddingLeft="10dp"
         android:paddingTop="20dp"
@@ -54,7 +54,7 @@
             android:text="努力ing"
             android:textColor="#43BBE7" />
 
-    </com.example.niaogebiji.myviewapplication.view.MyFlowLayout>
+    </com.example.niaogebiji.myviewapplication.view.commonviewgroup.MyFlowLayout>
 
     <!--  第二个 -->
     <Button
@@ -70,11 +70,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.niaogebiji.myviewapplication.view.MyWaterFallLayout
+        <com.example.niaogebiji.myviewapplication.view.commonviewgroup.MyWaterFallLayout
             android:id="@+id/myWaterFallLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </com.example.niaogebiji.myviewapplication.view.MyWaterFallLayout>
+        </com.example.niaogebiji.myviewapplication.view.commonviewgroup.MyWaterFallLayout>
 
     </ScrollView>
 

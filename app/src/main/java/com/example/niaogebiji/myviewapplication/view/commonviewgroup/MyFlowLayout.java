@@ -1,4 +1,4 @@
-package com.example.niaogebiji.myviewapplication.view;
+package com.example.niaogebiji.myviewapplication.view.commonviewgroup;
 
 import android.content.Context;
 import android.util.AttributeSet;

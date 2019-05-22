@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.niaogebiji.myviewapplication.R;
-import com.example.niaogebiji.myviewapplication.view.MyWaterFallLayout;
+import com.example.niaogebiji.myviewapplication.view.commonviewgroup.MyWaterFallLayout;
 
 public class MainActivity extends AppCompatActivity {
 
